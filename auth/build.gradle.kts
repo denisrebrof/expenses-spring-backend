@@ -21,20 +21,37 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-security")
+    //JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
+
+    //Security
+    implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
+    implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.1.RELEASE")
+    implementation("org.springframework.security:spring-security-jwt:1.1.1.RELEASE")
+
+    //Http endpoints
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    //Mongo DB
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+
+    //Reactor
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    //Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    //Lombok
     compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
+
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    //Modules
     implementation(project(":users"))
     implementation(kotlin("script-runtime"))
 }
