@@ -1,6 +1,6 @@
-package com.upreality.users.domain
+package domain
 
-import com.upreality.users.domain.models.User
+import domain.models.User
 
 interface IUsersRepository {
     fun create(user: User): User

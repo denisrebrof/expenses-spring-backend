@@ -1,17 +1,17 @@
-package com.upreality.users.domain.models
+package domain.models
 
 sealed class TokenState {
 
     object Undefined : TokenState()
 
     data class Defined(
-            val token: String
+        val token: String
     ) : TokenState()
 
     fun getOrNull(): String? {
         return when (this) {
-            is TokenState.Defined -> this.token
-            TokenState.Undefined -> null
+            is Defined -> this.token
+            Undefined -> null
         }
     }
 

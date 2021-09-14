@@ -1,4 +1,4 @@
-package com.upreality.users.data
+package data
 
 import org.springframework.data.mongodb.repository.MongoRepository
 

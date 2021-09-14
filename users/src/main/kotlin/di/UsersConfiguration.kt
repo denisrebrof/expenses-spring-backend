@@ -1,7 +1,7 @@
-package com.upreality.users.di
+package di
 
-import com.upreality.users.data.UsersRepositoryImpl
-import com.upreality.users.domain.IUsersRepository
+import data.UsersRepositoryImpl
+import domain.IUsersRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

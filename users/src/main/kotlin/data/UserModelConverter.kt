@@ -1,27 +1,27 @@
-package com.upreality.users.data
+package data
 
-import com.upreality.users.domain.models.*
+import domain.models.*
 
 object UserModelConverter {
 
     fun toUserModel(user: User): UserModel {
         val emailData = user.credentials
-                .filterIsInstance(Credentials.Base.Email::class.java)
-                .firstOrNull()
-                ?.email
+            .filterIsInstance(Credentials.Base.Email::class.java)
+            .firstOrNull()
+            ?.email
         val googleIdData = user.credentials
-                .filterIsInstance(Credentials.ProviderBased.Google::class.java)
-                .firstOrNull()
-                ?.googleId
+            .filterIsInstance(Credentials.ProviderBased.Google::class.java)
+            .firstOrNull()
+            ?.googleId
         return UserModel(
-                id = user.id,
-                email = emailData,
-                googleId = googleIdData,
-                nickname = user.nickname.getOrNull(),
-                passwordHash = user.password.getHashOrNull(),
-                token = user.token.getOrNull(),
-                refreshToken = user.refreshToken.getOrNull(),
-                createdDate = user.createdDate
+            id = user.id,
+            email = emailData,
+            googleId = googleIdData,
+            nickname = user.nickname.getOrNull(),
+            passwordHash = user.password.getHashOrNull(),
+            token = user.token.getOrNull(),
+            refreshToken = user.refreshToken.getOrNull(),
+            createdDate = user.createdDate
         )
     }
 
@@ -38,13 +38,13 @@ object UserModelConverter {
             PasswordState.Defined(password)
         } ?: PasswordState.Undefined
         return User(
-                id = model.id,
-                credentials = credentials,
-                createdDate = model.createdDate,
-                token = tokenState,
-                refreshToken = refreshTokenState,
-                nickname = nicknameState,
-                password = passwordState
+            id = model.id,
+            credentials = credentials,
+            createdDate = model.createdDate,
+            token = tokenState,
+            refreshToken = refreshTokenState,
+            nickname = nicknameState,
+            password = passwordState
         )
     }
 }

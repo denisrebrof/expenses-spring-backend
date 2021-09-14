@@ -1,15 +1,15 @@
-package com.upreality.users.domain
+package domain
 
-import com.upreality.users.domain.models.User
+import domain.models.User
 
 class UserUseCases(
-        private val repository: IUsersRepository
+    private val repository: IUsersRepository
 ) {
     fun getUser(userId: Long): User {
         return repository.getById(userId)
     }
 
     fun createUser(): User {
-
+        return repository.create(User(0L))
     }
 }

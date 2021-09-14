@@ -1,15 +1,15 @@
-package com.upreality.users.domain.models
+package domain.models
 
 sealed class Credentials {
-    sealed class Base() : Credentials() {
+    sealed class Base : Credentials() {
         data class Email(
-                val email: String,
-                val verified: Boolean = false
+            val email: String,
+            val verified: Boolean = false
         ) : Base()
 
         data class Phone(
-                val phone: String,
-                val verified: Boolean = false
+            val phone: String,
+            val verified: Boolean = false
         ) : Base()
     }
 

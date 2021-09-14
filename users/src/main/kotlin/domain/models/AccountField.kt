@@ -1,4 +1,4 @@
-package com.upreality.users.domain.models
+package domain.models
 
 sealed class AccountField<out T> {
     object Undefined : AccountField<Nothing>()

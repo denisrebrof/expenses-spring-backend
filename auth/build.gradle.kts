@@ -1,6 +1,7 @@
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
+    id("java")
     kotlin("jvm")
     kotlin("plugin.spring")
 }
@@ -35,4 +36,5 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     implementation(project(":users"))
+    implementation(kotlin("script-runtime"))
 }

@@ -1,4 +1,4 @@
-package com.upreality.users.domain.models
+package domain.models
 
 sealed class PasswordState {
     object Undefined : PasswordState()
@@ -6,8 +6,8 @@ sealed class PasswordState {
 
     fun getHashOrNull(): String? {
         return when (this) {
-            is PasswordState.Defined -> this.hash
-            PasswordState.Undefined -> null
+            is Defined -> this.hash
+            Undefined -> null
         }
     }
 }
