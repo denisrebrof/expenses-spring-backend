@@ -46,8 +46,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     //Lombok
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
