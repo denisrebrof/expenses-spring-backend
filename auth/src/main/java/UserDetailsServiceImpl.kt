@@ -8,5 +8,4 @@ class UserDetailsServiceImpl: UserDetailsService {
     override fun loadUserByUsername(username: String?): UserDetails {
         return User("foo", "foo", arrayListOf())
     }
-
 }

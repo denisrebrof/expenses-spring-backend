@@ -1,5 +1,7 @@
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -11,7 +13,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-
+@Configuration
 @EnableWebSecurity
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
@@ -21,6 +23,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private val jwtRequestFilter: JWTRequestFilter? = null
 
+    private final var logger = LoggerFactory.getLogger(WebSecurityConfigurerAdapter::class.java)
+
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
         super.configure(auth)
@@ -29,6 +33,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(security: HttpSecurity) {
+        logger.debug("configure")
         security.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
                 .anyRequest().authenticated().and().sessionManagement()
