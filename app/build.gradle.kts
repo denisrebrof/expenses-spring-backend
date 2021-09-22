@@ -15,10 +15,6 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     //Security
     implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
@@ -46,6 +42,6 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     //Modules
-    implementation(project(":users"))
-    implementation(project(":auth"))
+    implementation(projects.users)
+    implementation(projects.auth)
 }

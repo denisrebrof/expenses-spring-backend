@@ -1,23 +1,16 @@
 plugins {
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
     id("java")
     kotlin("jvm")
     kotlin("plugin.spring")
 }
 
 group = "com.upreality"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
     }
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -49,5 +42,5 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:2.5.4")
 
     //Modules
-    implementation(project(":users"))
+    implementation(projects.users)
 }
