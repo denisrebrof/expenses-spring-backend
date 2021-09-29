@@ -36,6 +36,12 @@ class AuthController {
         return "Nil here"
     }
 
+    @RequestMapping("/hello2")
+    fun helloTwo(): String {
+        logger.debug("AuthController hello 2")
+        return "N0l here"
+    }
+
     @PostMapping("/authenticate")
     fun authenticate(@RequestBody authenticationRequest: AuthenticationRequest): ResponseEntity<*> {
         val authenticate: Authentication = UsernamePasswordAuthenticationToken(

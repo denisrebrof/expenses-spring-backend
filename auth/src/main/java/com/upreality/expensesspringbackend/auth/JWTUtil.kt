@@ -14,7 +14,7 @@ class JWTUtil {
 
     fun generateToken(userDetails: UserDetails): String? {
         val claims: Map<String, Any> = HashMap()
-        return createToken(claims, userDetails.username)
+        return createToken(claims, userDetails.username, EXPIRATION_OFFSET)
     }
 
     fun validateToken(token: String?, userDetails: UserDetails): Boolean? {
@@ -43,13 +43,25 @@ class JWTUtil {
         return extractExpiration(token).before(Date())
     }
 
-    private fun createToken(claims: Map<String, Any>, subject: String): String? {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(Date(System.currentTimeMillis()))
-                .setExpiration(Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact()
+    private fun createToken(
+        claims: Map<String, Any>,
+        subject: String,
+        expirationOffset: Long,
+        currentTime: Long = System.currentTimeMillis()
+    ): String? {
+        val issuedAt = Date(currentTime)
+        val expiration = Date(currentTime + expirationOffset)
+        return Jwts.builder()
+            .setClaims(claims)
+            .setSubject(subject)
+            .setIssuedAt(issuedAt)
+            .setExpiration(expiration)
+            .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+            .compact()
     }
 
     companion object {
         private const val SECRET_KEY = "secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret"
+        private const val EXPIRATION_OFFSET: Long = 1000 * 60 * 60 * 10
     }
 }

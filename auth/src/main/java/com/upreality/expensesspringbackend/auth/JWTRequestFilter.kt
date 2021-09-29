@@ -11,7 +11,9 @@ import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import kotlin.reflect.safeCast
 
+@Component
 class JWTRequestFilter : OncePerRequestFilter() {
 
     @Autowired
@@ -25,22 +27,39 @@ class JWTRequestFilter : OncePerRequestFilter() {
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val authorizationHeader = request.getHeader("Authorization")
-
-        val bearerToken = request.getHeader("Authorization")
-
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            val jwtToken = bearerToken.substring(7, bearerToken.length)
-            var username = jwtUtil?.extractUsername(jwtToken)
-            if (username != null && SecurityContextHolder.getContext().authentication == null) {
-                val userDetails: UserDetails = userDetailsService!!.loadUserByUsername(username)
-                if (jwtUtil!!.validateToken(jwtToken, userDetails) == true) {
-                    val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
-                    usernamePasswordAuthenticationToken.details = WebAuthenticationDetailsSource().buildDetails(request)
-                    SecurityContextHolder.getContext().authentication = usernamePasswordAuthenticationToken
-                }
-            }
+        val authResult = request.getHeader("Authorization").let(this::getAuthentication)
+        authResult.let(GetAuthenticationResult.Authenticated::class::safeCast)?.authentication?.apply {
+            details = WebAuthenticationDetailsSource().buildDetails(request)
+            SecurityContextHolder.getContext().authentication = this
         }
         filterChain.doFilter(request, response)
+    }
+
+    private fun getAuthentication(bearerToken: String): GetAuthenticationResult {
+        if (!StringUtils.hasText(bearerToken) || !bearerToken.startsWith("Bearer "))
+            return GetAuthenticationResult.InvalidTokenFormat
+
+        val jwtToken = bearerToken.substring(7, bearerToken.length)
+        val username = jwtUtil?.extractUsername(jwtToken) ?: return GetAuthenticationResult.UsernameMissed
+
+        if (SecurityContextHolder.getContext().authentication != null)
+            return GetAuthenticationResult.AlreadyDefined
+
+        val userDetails: UserDetails = userDetailsService!!.loadUserByUsername(username)
+
+        if (jwtUtil!!.validateToken(jwtToken, userDetails) != true)
+            return GetAuthenticationResult.InvalidToken
+
+        return UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities).let(
+            GetAuthenticationResult::Authenticated
+        )
+    }
+
+    private sealed class GetAuthenticationResult {
+        object InvalidTokenFormat : GetAuthenticationResult()
+        object UsernameMissed : GetAuthenticationResult()
+        object AlreadyDefined : GetAuthenticationResult()
+        object InvalidToken : GetAuthenticationResult()
+        data class Authenticated(val authentication: UsernamePasswordAuthenticationToken) : GetAuthenticationResult()
     }
 }
