@@ -1,6 +1,5 @@
 package com.upreality.expensesspringbackend.auth
 
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.security.authentication.AuthenticationManager
@@ -25,8 +24,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private val jwtRequestFilter: JWTRequestFilter? = null
 
-    private final var logger = LoggerFactory.getLogger(WebSecurityConfigurerAdapter::class.java)
-
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
         super.configure(auth)
@@ -35,7 +32,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(security: HttpSecurity) {
-        logger.debug("configure")
         security.csrf().disable()
             .authorizeRequests()
             .antMatchers("/authenticate").permitAll()

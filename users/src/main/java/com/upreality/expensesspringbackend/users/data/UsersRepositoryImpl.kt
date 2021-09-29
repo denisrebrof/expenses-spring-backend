@@ -18,7 +18,7 @@ class UsersRepositoryImpl(
             .let(UserModelConverter::fromUserModel)
     }
 
-    override fun getById(id: Long): User {
-        return dao.getById(id).let(UserModelConverter::fromUserModel)
+    override fun getById(id: Long): User? {
+        return dao.getById(id)?.let(UserModelConverter::fromUserModel)
     }
 }

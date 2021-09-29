@@ -17,10 +17,10 @@ import kotlin.reflect.safeCast
 class JWTRequestFilter : OncePerRequestFilter() {
 
     @Autowired
-    var jwtUtil: JWTUtil? = null
+    private lateinit var jwtUtil: JWTUtil
 
     @Autowired
-    var userDetailsService: UserDetailsServiceImpl? = null
+    private lateinit var userDetailsService: UserDetailsServiceImpl
 
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -40,14 +40,17 @@ class JWTRequestFilter : OncePerRequestFilter() {
             return GetAuthenticationResult.InvalidTokenFormat
 
         val jwtToken = bearerToken.substring(7, bearerToken.length)
-        val username = jwtUtil?.extractUsername(jwtToken) ?: return GetAuthenticationResult.UsernameMissed
+        val username = jwtUtil.extractUsername(jwtToken)
+
+        if (username.isEmpty())
+            return GetAuthenticationResult.UsernameMissed
 
         if (SecurityContextHolder.getContext().authentication != null)
             return GetAuthenticationResult.AlreadyDefined
 
-        val userDetails: UserDetails = userDetailsService!!.loadUserByUsername(username)
+        val userDetails: UserDetails = userDetailsService.loadUserByUsername(username)
 
-        if (jwtUtil!!.validateToken(jwtToken, userDetails) != true)
+        if (jwtUtil.validateToken(jwtToken, userDetails) != true)
             return GetAuthenticationResult.InvalidToken
 
         return UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities).let(

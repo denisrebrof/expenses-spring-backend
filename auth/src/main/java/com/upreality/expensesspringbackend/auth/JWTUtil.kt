@@ -17,9 +17,9 @@ class JWTUtil {
         return createToken(claims, userDetails.username, EXPIRATION_OFFSET)
     }
 
-    fun validateToken(token: String?, userDetails: UserDetails): Boolean? {
+    fun validateToken(token: String, userDetails: UserDetails): Boolean? {
         val username = extractUsername(token)
-        return username == userDetails.username && !isTokenExpired(token)!!
+        return username == userDetails.username && !isTokenExpired(token)
     }
 
     fun extractUsername(token: String?): String {
@@ -39,7 +39,7 @@ class JWTUtil {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).body
     }
 
-    private fun isTokenExpired(token: String?): Boolean? {
+    private fun isTokenExpired(token: String): Boolean {
         return extractExpiration(token).before(Date())
     }
 

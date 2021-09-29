@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @EnableAutoConfiguration(exclude = [DataSourceAutoConfiguration::class])
-@ComponentScan(basePackages = ["com.upreality"])
+@ComponentScan(basePackages = ["com.upreality.expensesspringbackend"])
 class ExpensesSpringBackendApplication
 
 fun main(args: Array<String>) {
