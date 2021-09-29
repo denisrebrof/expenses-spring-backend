@@ -50,6 +50,6 @@ class JWTUtil {
     }
 
     companion object {
-        private const val SECRET_KEY = "secret"
+        private const val SECRET_KEY = "secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret"
     }
 }
