@@ -1,4 +1,4 @@
-package domain.models
+package com.upreality.expensesspringbackend.users.domain.models
 
 sealed class AccountField<out T> {
     object Undefined : AccountField<Nothing>()

@@ -1,7 +1,7 @@
-package data
+package com.upreality.expensesspringbackend.users.data
 
-import domain.IUsersRepository
-import domain.models.User
+import com.upreality.expensesspringbackend.users.domain.IUsersRepository
+import com.upreality.expensesspringbackend.users.domain.models.User
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDateTime
 

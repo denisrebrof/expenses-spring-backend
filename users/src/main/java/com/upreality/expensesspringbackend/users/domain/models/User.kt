@@ -1,9 +1,5 @@
-package domain.models
+package com.upreality.expensesspringbackend.users.domain.models
 
-import domain.models.AccountField
-import domain.models.Credentials
-import domain.models.PasswordState
-import domain.models.TokenState
 import java.time.LocalDateTime
 
 data class User(

@@ -1,7 +1,6 @@
 plugins {
-    id("java")
-    kotlin("jvm")
-    kotlin("plugin.spring")
+    kotlin("jvm") version "1.5.21"
+    kotlin("plugin.spring") version "1.5.21"
 }
 
 group = "com.upreality"

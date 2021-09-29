@@ -1,4 +1,4 @@
-package data
+package com.upreality.expensesspringbackend.users.data
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

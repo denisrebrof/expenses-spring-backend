@@ -1,13 +1,16 @@
+package com.upreality.expensesspringbackend.auth
+
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
+@Component
 class JWTUtil {
-    private val SECRET_KEY = "secret"
 
     fun generateToken(userDetails: UserDetails): String? {
         val claims: Map<String, Any> = HashMap()
@@ -44,5 +47,9 @@ class JWTUtil {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(Date(System.currentTimeMillis()))
                 .setExpiration(Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact()
+    }
+
+    companion object {
+        private const val SECRET_KEY = "secret"
     }
 }

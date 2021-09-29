@@ -1,8 +1,8 @@
-package data
+package com.upreality.expensesspringbackend.users.data
 
-import domain.models.*
-import domain.models.Credentials.Base.Email
-import domain.models.Credentials.ProviderBased.Google
+import com.upreality.expensesspringbackend.users.domain.models.*
+import com.upreality.expensesspringbackend.users.domain.models.Credentials.Base.Email
+import com.upreality.expensesspringbackend.users.domain.models.Credentials.ProviderBased.Google
 
 object UserModelConverter {
 

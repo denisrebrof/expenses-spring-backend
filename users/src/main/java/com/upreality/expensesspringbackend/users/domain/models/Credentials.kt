@@ -1,4 +1,4 @@
-package domain.models
+package com.upreality.expensesspringbackend.users.domain.models
 
 sealed class Credentials {
     sealed class Base : Credentials() {

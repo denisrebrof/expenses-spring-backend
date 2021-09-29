@@ -1,6 +1,6 @@
-package domain
+package com.upreality.expensesspringbackend.users.domain
 
-import domain.models.User
+import com.upreality.expensesspringbackend.users.domain.models.User
 
 class UserUseCases(
     private val repository: IUsersRepository
