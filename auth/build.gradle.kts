@@ -21,6 +21,9 @@ dependencies {
     //Security
     implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
     implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.1.RELEASE")
+    implementation("org.springframework.security:spring-security-oauth2-client:5.1.0.RELEASE")
+
+//    implementation("org.springframework.security.oauth:spring-security-oauth2-client:2.5.1.RELEASE")
     implementation("org.springframework.security:spring-security-jwt:1.1.1.RELEASE")
 
     //Http endpoints
