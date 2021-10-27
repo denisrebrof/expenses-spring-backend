@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-abstract class UsersConfiguration {
+class UsersConfiguration {
     @Bean
-    abstract fun provideRepository(repository: UsersRepositoryImpl): IUsersRepository
+    fun provideRepository(repository: UsersRepositoryImpl): IUsersRepository = repository
 }

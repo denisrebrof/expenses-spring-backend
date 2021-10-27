@@ -3,10 +3,11 @@ package com.upreality.expensesspringbackend.users.data
 import com.upreality.expensesspringbackend.users.domain.IUsersRepository
 import com.upreality.expensesspringbackend.users.domain.models.User
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
-class UsersRepositoryImpl(
-    @Autowired
+@Component
+class UsersRepositoryImpl @Autowired constructor(
     private val dao: IUsersDao
 ) : IUsersRepository {
 

@@ -15,6 +15,11 @@ configurations {
     }
 }
 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 dependencies {
     //Security
     implementation("org.springframework.boot:spring-boot-starter-security:2.5.4")
@@ -40,6 +45,9 @@ dependencies {
     //Lombok
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    //Swagger
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
 
     //Modules
     implementation(projects.users)
