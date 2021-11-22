@@ -25,8 +25,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private val jwtRequestFilter: JWTRequestFilter? = null
 
-    @Autowired
-    private val oauthLoginFilter: OAuth2LoginAuthenticationFilter? = null
+//    @Autowired
+//    private val oauthLoginFilter: OAuth2LoginAuthenticationFilter? = null
 
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
@@ -44,7 +44,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().oauth2Login()
         security.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
-        security.addFilterBefore(oauthLoginFilter, JWTRequestFilter::class.java)
+//        security.addFilterBefore(oauthLoginFilter, JWTRequestFilter::class.java)
     }
 
     @Bean
